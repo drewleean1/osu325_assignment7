@@ -15,20 +15,20 @@ def minEffort_helper(puzzle, n, m, visited):
             min_coords = (x[0], x[1])
     if min_coords not in visited:
         visited.append(min_coords)
-    return min_coords
+    return (min_coords, min)
 
 def minEffort(puzzle):
     target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
     n = 0
     m = 0
-    result = [(0,0)]
+    result = 0
     visited = [(0,0)]
     while m != target_m or n != target_n:
         lowest_effort = minEffort_helper(puzzle, n, m, visited)
-        height = puzzle[lowest_effort[0]][lowest_effort[1]]
-        result.append(lowest_effort)
-        n = lowest_effort[0]
-        m = lowest_effort[1]
+        if lowest_effort[1] > result:
+            result = lowest_effort[1]
+        n = lowest_effort[0][0]
+        m = lowest_effort[1][0]
     return result
 
