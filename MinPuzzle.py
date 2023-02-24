@@ -29,6 +29,8 @@ def minEffort(puzzle):
         if lowest_effort[1] > result:
             result = lowest_effort[1]
         n = lowest_effort[0][0]
-        m = lowest_effort[1][0]
+        m = lowest_effort[0][1]
     return result
+
+print(minEffort( [[1, 3, 5], [2, 8, 3], [3, 4, 5]]))
 
