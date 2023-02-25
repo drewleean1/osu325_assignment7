@@ -77,9 +77,11 @@ def minEffort(puzzle):
                 print('yes')
                 effort[x] = current_effort
                 heapq.heappush(pq, (current_effort, x))
+    answer = 0
+    for x in effort:
+        if effort[x]> answer:
+            answer = effort[x]
+    return answer
 
-    return effort
-
-    print(effort)
 
 print(minEffort([[1, 3, 2], [3, 7, 3], [3, 5, 6]]))
