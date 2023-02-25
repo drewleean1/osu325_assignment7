@@ -16,7 +16,6 @@ def minEffort_helper(puzzle, n, m, visited, result):
                 continue
             temporary = abs(current - puzzle[x[0]][x[1]])
             if temporary >= result:
-                print(result)
                 result = temporary
                 minEffort_helper(puzzle, x[0], x[1], visited, result)
 
@@ -42,8 +41,6 @@ def minEffort2(puzzle):
         n = lowest_effort[0][0]
         m = lowest_effort[0][1]'''
     return result
-
-#print(minEffort([[1, 3, 2], [3, 7, 3], [3, 5, 6]]))
 
 #print(minEffort_helper([[1, 3, 5], [3, 8, 3], [3, 4, 5]], 0, 2, [(0,0), (0,1), (0,2)]))
 
@@ -83,5 +80,3 @@ def minEffort(puzzle):
             answer = effort[x]
     return answer
 
-
-print(minEffort([[1, 3, 2], [3, 7, 3], [3, 5, 6]]))
