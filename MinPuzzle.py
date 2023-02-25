@@ -46,37 +46,49 @@ def minEffort2(puzzle):
 
 
 def minEffort(puzzle):
-    target_n = len(puzzle[0])
-    target_m = len(puzzle)
+    target_n = len(puzzle[0])-1
+    target_m = len(puzzle)-1
     effort = {}
-    for x in range(target_n):
-        for y in range(target_m):
+    for x in range(target_n+1):
+        for y in range(target_m+1):
             effort[x,y] = float('inf')
     effort[0,0] = 0
-    pq = [(0, (0,0))]
+    pq = [(0,0)]
+    visited = []
+    minimum = 0
     while len (pq) > 0:
-        current_height, current_node = heapq.heappop(pq)
+        current_node = heapq.heappop(pq)
         # Nodes can get added to the priority queue multiple times. We only
         # process a vertex the first time we remove it from the priority queue.
-        if current_height > effort[current_node]:
+        #if current_height > effort[current_node]:
+        #    continue
+        if current_node in visited:
             continue
+        visited.append(current_node)
+        print(current_node)
+        if current_node == (target_n, target_m):
+            print('arrive')
+            print(effort)
+            #return effort[current_node]
+            return minimum
         n = current_node[0]
         m = current_node[1]
         for x in [(n-1, m), (n+1, m), (n, m+1), (n, m-1)]:
-            print(current_node, x)
             if x not in effort:
+                continue
+            if x in visited:
                 continue
             current_effort =  abs(puzzle[n][m] - puzzle[x[0]][x[1]])
             print('hello', current_effort)
             # Only consider this new path if it's better than any path we've
             # already found.
+            heapq.heappush(pq, (x))
             if current_effort < effort[x]:
-                print('yes')
                 effort[x] = current_effort
-                heapq.heappush(pq, (current_effort, x))
-    answer = 0
-    for x in effort:
-        if effort[x]> answer:
-            answer = effort[x]
-    return answer
+            if x == (target_n, target_m):
+                if minimum < current_effort:
+                    minimum = current_effort
+    print(effort)
+    return minimum
 
+print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
