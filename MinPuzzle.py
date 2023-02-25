@@ -84,7 +84,7 @@ def minEffort(puzzle):
             if x == (target_n, target_m):
                 if minimum < current_effort:
                     minimum = current_effort
-    print(effort)
+    print('hello')
     return minimum
 
 print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
