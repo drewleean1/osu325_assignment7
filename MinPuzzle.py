@@ -46,6 +46,7 @@ def minEffort2(puzzle):
 
 
 def minEffort(puzzle):
+    print(puzzle)
     target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
     effort = {}
