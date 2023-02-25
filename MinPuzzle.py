@@ -46,14 +46,12 @@ def minEffort2(puzzle):
 
 
 def minEffort(puzzle):
-    print(puzzle)
     target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
     effort = {}
     for x in range(target_m+1):
         for y in range(target_n+1):
             effort[x,y] = float('inf')
-    print(effort)
     effort[0,0] = 0
     pq = [(0,0)]
     visited = []
@@ -67,10 +65,7 @@ def minEffort(puzzle):
         if current_node in visited:
             continue
         visited.append(current_node)
-        print(current_node)
         if current_node == (target_m, target_n):
-            print('arrive')
-            print(effort)
             return effort[current_node]
             #return minimum
         m = current_node[0]
@@ -81,7 +76,6 @@ def minEffort(puzzle):
             if x in visited:
                 continue
             current_effort =  abs(puzzle[m][n] - puzzle[x[0]][x[1]])
-            print('hello', current_effort)
             # Only consider this new path if it's better than any path we've
             # already found.
             heapq.heappush(pq, (x))
@@ -90,7 +84,7 @@ def minEffort(puzzle):
             if x == (target_n, target_m):
                 if minimum < current_effort:
                     minimum = current_effort
+    print(effort)
     return minimum
 
-#print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
-print(minEffort([[1,1,1], [1,1,1], [1,1,1], [1,1,1]]))
+print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
