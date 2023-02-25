@@ -71,8 +71,8 @@ def minEffort(puzzle):
         if current_node == (target_m, target_n):
             print('arrive')
             print(effort)
-            #return effort[current_node]
-            return minimum
+            return effort[current_node]
+            #return minimum
         m = current_node[0]
         n = current_node[1]
         for x in [(m-1, n), (m+1, n), (m, n+1), (m, n-1)]:
