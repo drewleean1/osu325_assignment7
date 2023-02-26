@@ -46,18 +46,17 @@ def minEffort2(puzzle):
 
 
 def minEffort(puzzle):
+    print(puzzle)
     target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
     effort = {}
     for x in range(target_m+1):
         for y in range(target_n+1):
             effort[x,y] = float('inf')
-    effort[0,0] = 0
+    effort[(0,0)] = 0
     pq = [(0,0)]
     visited = []
-    minimum = 0
-    return min(abs(puzzle[target_m][target_n] - puzzle[target_m-1][target_n]), abs(puzzle[target_m][target_n] - puzzle[target_m][target_n-1]))
-    '''while len (pq) > 0:
+    while len (pq) > 0:
         current_node = heapq.heappop(pq)
         # Nodes can get added to the priority queue multiple times. We only
         # process a vertex the first time we remove it from the priority queue.
@@ -66,9 +65,7 @@ def minEffort(puzzle):
         if current_node in visited:
             continue
         visited.append(current_node)
-        if current_node == (target_m, target_n):
-            return effort[current_node]
-            #return minimum
+
         m = current_node[0]
         n = current_node[1]
         for x in [(m-1, n), (m+1, n), (m, n+1), (m, n-1)]:
@@ -82,11 +79,7 @@ def minEffort(puzzle):
             heapq.heappush(pq, (x))
             if current_effort < effort[x]:
                 effort[x] = current_effort
-            if x == (target_n, target_m):
-                if minimum < current_effort:
-                    minimum = current_effort
-    print('hello')'''
-    #return minimum
+    return effort[(target_m, target_n)]
 
 print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
 
