@@ -79,7 +79,8 @@ def minEffort(puzzle):
             heapq.heappush(pq, (x))
             if current_effort < effort[x]:
                 effort[x] = current_effort
+    print(effort[(target_m, target_n)])
     return effort[(target_m, target_n)]
 
-print(minEffort([[1, 3, 5], [3, 8, 3], [3, 4, 5]]))
+print(minEffort([[1, 3, 5], [2, 8, 3], [3, 4, 5]]))
 
