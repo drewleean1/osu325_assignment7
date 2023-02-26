@@ -58,14 +58,9 @@ def minEffort(puzzle):
     visited = []
     while len (pq) > 0:
         current_node = heapq.heappop(pq)
-        # Nodes can get added to the priority queue multiple times. We only
-        # process a vertex the first time we remove it from the priority queue.
-        #if current_height > effort[current_node]:
-        #    continue
         if current_node in visited:
             continue
         visited.append(current_node)
-
         m = current_node[0]
         n = current_node[1]
         for x in [(m-1, n), (m+1, n), (m, n+1), (m, n-1)]:
@@ -76,9 +71,10 @@ def minEffort(puzzle):
             current_effort =  abs(puzzle[m][n] - puzzle[x[0]][x[1]])
             # Only consider this new path if it's better than any path we've
             # already found.
-            heapq.heappush(pq, (x))
             if current_effort < effort[x]:
                 effort[x] = current_effort
+                heapq.heappush(pq, (x))
+
     print(effort[(target_m, target_n)])
     return effort[(target_m, target_n)]
 
