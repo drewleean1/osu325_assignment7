@@ -2,6 +2,7 @@
 import heapq
 
 def minEffort(puzzle):
+    print(puzzle)
     target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
     effort = {}
@@ -24,8 +25,6 @@ def minEffort(puzzle):
             if x in visited:
                 continue
             current_effort =  abs(puzzle[m][n] - puzzle[x[0]][x[1]])
-            # Only consider this new path if it's better than any path we've
-            # already found.
             if current_effort < effort[x][0]:
                 effort[x] = (current_effort, (m,n))
                 heapq.heappush(pq, (x))
