@@ -19,16 +19,19 @@ def minEffort(puzzle):
         visited.append(current_node)
         m = current_node[0]
         n = current_node[1]
-        for x in [(m-1, n), (m+1, n), (m, n+1), (m, n-1)]:
-            if x not in effort:
+        for neighbor in [(m-1, n), (m+1, n), (m, n+1), (m, n-1)]:
+            if neighbor not in effort:
                 continue
-            if x in visited:
+            if neighbor in visited:
                 continue
-            current_effort =  abs(puzzle[m][n] - puzzle[x[0]][x[1]])
-            if current_effort < effort[x][0]:
-                effort[x] = (current_effort, x)
-                effort[(m,n)] = (effort[(m,n)][0], x)
-                heapq.heappush(pq, (x))
+            current_effort =  abs(puzzle[m][n] - puzzle[neighbor[0]][neighbor[1]])
+            print(current_node, neighbor, puzzle[neighbor[0]][neighbor[1]], current_effort)
+
+            if current_effort < effort[neighbor][0]:
+                effort[neighbor] = (current_effort, neighbor)
+                if current_effort < effort[(m,n)][0]
+                    effort[(m,n)] = (effort[(m,n)][0], neighbor)
+                heapq.heappush(pq, (neighbor))
     max_effort = 0
     end_of_list = (0, 0)
     for x in effort:
@@ -40,5 +43,3 @@ def minEffort(puzzle):
     if effort[end_of_list][0] > max_effort:
         max_effort = effort[end_of_list][0]
     return max_effort
-
-print(minEffort([[1, 3, 5], [3, 8, 7], [5, 3, 9], [7, 9, 6]]))
