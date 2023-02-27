@@ -58,7 +58,6 @@ def minEffort(puzzle):
     effort[(0, 0)] = 0
     pq = [(0, 0)]
     visited = []
-    print(effort)
     while len(pq) > 0:
         current_node = heapq.heappop(pq)
         if current_node in visited:
