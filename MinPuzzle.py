@@ -29,7 +29,7 @@ def minEffort(puzzle):
 
             if current_effort < effort[neighbor][0]:
                 effort[neighbor] = (current_effort, neighbor)
-                if current_effort < effort[(m,n)][0]
+                if current_effort < effort[(m,n)][0]:
                     effort[(m,n)] = (effort[(m,n)][0], neighbor)
                 heapq.heappush(pq, (neighbor))
     max_effort = 0
