@@ -9,7 +9,7 @@ def minEffort(puzzle):
     for x in range(target_m+1):
         for y in range(target_n+1):
             effort[x,y] = (float('inf'), (0,0))
-    effort[(0,0)] = (0, (0,0))
+    #effort[(0,0)] = (float('inf'), (0,0))
     pq = [(0,0)]
     visited = []
     while len (pq) > 0:
@@ -29,11 +29,13 @@ def minEffort(puzzle):
 
             if current_effort < effort[neighbor][0]:
                 effort[neighbor] = (current_effort, neighbor)
-                if current_effort < effort[(m,n)][0]:
+                if current_effort <= effort[(m,n)][0]:
                     effort[(m,n)] = (effort[(m,n)][0], neighbor)
                 heapq.heappush(pq, (neighbor))
+    effort[(0,0)] = (0, effort[(0,0)][1])
     max_effort = 0
     end_of_list = (0, 0)
+    print('---------------')
     for x in effort:
         print(x, effort[x])
     while end_of_list != (target_m, target_n):
@@ -43,3 +45,5 @@ def minEffort(puzzle):
     if effort[end_of_list][0] > max_effort:
         max_effort = effort[end_of_list][0]
     return max_effort
+
+print(minEffort([[1, 3, 5], [2, 8, 3], [3, 4, 5]]))
