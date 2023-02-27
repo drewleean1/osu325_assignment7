@@ -3,8 +3,8 @@ import heapq
 
 def minEffort(puzzle):
     print(puzzle)
-    target_n = len(puzzle[0])-1
     target_m = len(puzzle)-1
+    target_n = len(puzzle[0])-1
     effort = {}
     for x in range(target_m+1):
         for y in range(target_n+1):
@@ -26,14 +26,19 @@ def minEffort(puzzle):
                 continue
             current_effort =  abs(puzzle[m][n] - puzzle[x[0]][x[1]])
             if current_effort < effort[x][0]:
-                effort[x] = (current_effort, (m,n))
+                effort[x] = (current_effort, x)
+                effort[(m,n)] = (effort[(m,n)][0], x)
                 heapq.heappush(pq, (x))
     max_effort = 0
-    end_of_list = (target_m, target_n)
-    while end_of_list != (0,0):
+    end_of_list = (0, 0)
+    for x in effort:
+        print(x, effort[x])
+    while end_of_list != (target_m, target_n):
         if effort[end_of_list][0] > max_effort:
             max_effort = effort[end_of_list][0]
         end_of_list = effort[end_of_list][1]
+    if effort[end_of_list][0] > max_effort:
+        max_effort = effort[end_of_list][0]
     return max_effort
 
-
+print(minEffort([[1, 3, 5], [3, 8, 7], [5, 3, 9], [7, 9, 6]]))
